@@ -11,6 +11,9 @@ if you want to use v9, you have to include the following in "package.json":
     // ~~~ originally existing codes here
   }
 */
+// fs is a Node standard library package for reading and writing files
+const fs = require('fs');
+
 
 /*
   I am following the following references:
@@ -18,6 +21,10 @@ if you want to use v9, you have to include the following in "package.json":
   https://www.educative.io/answers/how-to-use-the-inquirer-node-package
 */
 
+//const file_name = "./README.md";
+
+
+// ==============================================================================================
 // inquirer prompts:
 const questions = [
   {
@@ -27,11 +34,18 @@ const questions = [
     //default: false,
   },
   {
+    name: "project_title",
+    type: "input",
+    message: "What is the project title?"
+  },
+  /*
+  {
     name: "colors",
     type: "list",
     message: "What is your favorite color?",
     choices: ["black","red","blue","yellow","green","whitesmoke"],
   }
+  */
 ];
 
 inquirer
@@ -41,8 +55,11 @@ inquirer
   )
   .then((answers) => {
     // Use user feedback for... whatever!!
-    console.log(answers.user_name);
-    console.log(answers.colors);
+    //console.log(answers.user_name);
+    //console.log(answers.colors);
+
+    write_readme('./test.txt',answers.user_name);
+    append_readme('./test.txt',answers.project_title);
   })
   .catch((error) => {
     if (error.isTtyError) {
@@ -51,3 +68,23 @@ inquirer
       // Something else went wrong
     }
   });
+
+//function write_readme(file_name, data){
+//  fs.writeFile(file_name,data, function(err) {
+function write_readme(file_name, data){
+  fs.writeFile(file_name,data, function(err) {
+    if(err){
+      return console.log(err);
+    }
+    console.log("./test.txt > jw");
+  })
+}
+
+function append_readme(file_name, data){
+  fs.appendFile(file_name,data, function(err){
+    if(err){
+      return console.log(err);
+    }
+  })
+}
+//write_readme('./test.txt','jw2');
