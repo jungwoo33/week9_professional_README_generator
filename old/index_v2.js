@@ -192,7 +192,7 @@ inquirer
 
 
 
-    write_readme('./README_ex.md',data_string);
+    write_readme('./README.md',data_string);
   })
   .catch((error) => {
     if (error.isTtyError) {
