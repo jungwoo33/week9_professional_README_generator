@@ -74,12 +74,35 @@ const questions = [
     }
   },
   {
+    name: "email",
+    type: "input",
+    message: "Provide your email address (mandatory):",
+    validate: function(answer){
+      if(answer.length < 1) {
+        return console.log("A valid email address is required.");
+      }
+      return true;
+    }
+  },
+  {
     name: "description",
     type: "input",
     message: "Write a description of your project (mandatory):",
     validate: function(answer){
       if(answer.length < 1) {
         return console.log("A valid project description is required.");
+      }
+      return true;
+    }
+  },
+  {
+    name: "license",
+    type: "list",
+    message: "Choose a license for your project - this will be included in the License section (mandatory)",
+    choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
+    validate: function(answer){
+      if(answer.length < 1){
+        return console.log('A valid project license is required.');
       }
       return true;
     }
@@ -106,12 +129,6 @@ const questions = [
     type: "input",
     message: "Provide any tests written for your application and provide examples on how to run them - this will be included in the Test section (optional)",
   },
-  {
-    name: "license",
-    type: "list",
-    message: "Choose a license for your project - this will be included in the License section (optional)",
-    choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
-  },
 
   /*
   {
@@ -119,12 +136,6 @@ const questions = [
     type: "",
     message: "",
   },
-  {
-    name: "colors",
-    type: "list",
-    message: "What is your favorite color?",
-    choices: ["black","red","blue","yellow","green","whitesmoke"],
-  }
   */
 ];
 
@@ -139,58 +150,55 @@ inquirer
     let data_string = "# README by " + answers.user_name + "\n";
     data_string = data_string + "## Title: " + answers.project_title + "\n";
 
-    let description = "When creating an open source project on GitHub, " + 
-      "it is important to have a high-quality README for the app. This should includw what the app is for, " + 
-      "how to use the app, how to install it, how to report issues, and how to make contributions & mdash; " + 
-      "this last part increases the likelihood that other developers will contribute to the success of the project. " + 
-      "\n" +
-      "\n" +
-      "You can quickly and easily create a README file by using a command-line application to generate one. " +
-      "This allows the project creator to devote more time to working on the project. " +
-      "\n" +
-      "\n" +
-      "This is a command-line application that runs with Node.js that dynamically generates a README.md file " +
-      "based on input about your project. Checkout the example_readme.md in this repo as an example." 
     data_string = data_string + "## Description: \n"
-    data_string = data_string + description + "\n";
+    data_string = data_string + answers.description + "\n";
 
+    // include optional info:
     data_string = data_string + "## Table of Contents:\n";
     data_string = data_string + "This readme file includes the following contents:\n"
-    data_string = data_string + "+ Installation\n";
-    data_string = data_string + "+ Usage\n";
-    data_string = data_string + "+ License\n";
-    data_string = data_string + "+ Contributing\n";
-    data_string = data_string + "+ Test\n";
+    if(answers.install_guid.length > 0){
+      data_string = data_string + "+ Installation\n";
+    }
+    if(answers.usage.length > 0){
+      data_string = data_string + "+ Usage\n";
+    }
+    if(answers.contribute.length > 0){
+      data_string = data_string + "+ Contributing\n";
+    }
+    if(answers.test.length > 0){
+      data_string = data_string + "+ Test\n";
+    }
+    if(answers.license.length > 0){
+      data_string = data_string + "+ License\n";
+    }    
     data_string = data_string + "+ Questions\n";
 
-    data_string = data_string + "## Installation:\n";
-    let install_guid = "To generate your own README, `git clone` the repo down to your local so you have the Node project on your local.\n" +
-      "\n" +
-      "Run `npm install` in order to install the following `npm` package dependencies as specified in the `package.json`:\n" +
-      "+ `inquirer` will prompt you for your inputs from the command line.\n" + 
-      "\n" +
-      "The application will start by running `node index.js` in the command line.\n" +
-      "\n" + 
-      "Answer the prompts in your command line to generate the REAMDE.\n" +
-      "\n" + 
-      "After answering all the prompts, your REAMDE file will be named `README.md` and will be ready for you at the root of the repo.\n"
-    data_string = data_string + install_guid + "\n";  
-
-    data_string = data_string + "## Usage:\n";
-    let usage = "When you run `node index.js`, the application uses the `inquirer` package to prompt you in the command line with a series of questions about your GitHub and about your project.\n" +
-      "\n" +
-      "The application then takes your responses and uses `axios` to fetch your GitHub profile from the `GitHub API`, including your GitHub profile picture (avatar) and email." +
-      "From there, the application will generate markdown and a table of contents for the README conditionally based on your responses to the `Inquirer` prompts. " +
-      "So, if you don't answer the optional questions, such a `Installation`, and `Installation` section will not be included in your README. " +
-      "The REAMDE will also include badges for your GitHub repo.\n" +
-      "\n" +
-      "Finally, `fs.writeFile` is used to generate your project's REAMDE.md file. Checout the `ExampleREADME.md` in this repo as an example on the final output.\n";
-    data_string = data_string + usage + "\n";
-
-    data_string = data_string + "## License:\n";
-    data_string = data_string + "MIT License\n"
+    if(answers.install_guid.length > 0){
+      data_string = data_string + "## Installation:\n";
+      data_string = data_string + answers.install_guid + "\n";  
+    }
 
 
+    if(answers.usage.length > 0){
+      data_string = data_string + "## Usage:\n";
+      data_string = data_string + answers.usage + "\n";
+    }
+    if(answers.test.length > 0){
+      data_string = data_string + "## Test\n";
+    }
+    if(answers.license.length > 0){
+      data_string = data_string + "## License:\n";
+      data_string = data_string + answers.license + "\n";
+    }
+
+    data_string = data_string + "## Questions?:\n";
+    let question = "If you have any questions, feel free to contact me via information below:\n" +
+      "Email: " + answers.email + "\n" + 
+      "\n";
+    data_string = data_string + question;
+
+    let copywrite = "© 2022 " + answers.user_name + ". Confidential and Proprietrary. All Rights Reserved.\n";
+    data_string = data_string + copywrite; 
 
     write_readme('./README_ex.md',data_string);
   })
