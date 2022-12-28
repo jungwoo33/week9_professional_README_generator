@@ -86,7 +86,8 @@ const questions = [
   },
   {
     name: "description",
-    type: "input",
+    //type: "input",
+    type: "editor",
     message: "Write a description of your project (mandatory):",
     validate: function(answer){
       if(answer.length < 1) {
@@ -111,12 +112,14 @@ const questions = [
   // optional questions...
   {
     name: "install_guid",
-    type: "input",
+    //type: "input",
+    type: "editor",
     message: "Describe the steps required to install your project - this will be included in the Installation section (optional):",
   },
   {
     name: "usage",
-    type: "input",
+    //type: "input",
+    type: "editor",
     message: "Provide usage instructions of your project - this will be included in the Usage section (optional)",
   },
   {
