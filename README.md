@@ -1,47 +1,62 @@
 # README by Jungwoo Lee
 ## 1. Title: WEEK9_Professional_README_Generator
 
-## 2. Description: 
+## 2. Table of Contents:
+This readme file includes the following contents:
++ [Description](#3-description)
++ [Installation](#4-installation)
++ [Usage](#5-usage)
++ [License](#6-license)
++ [Application results](#7-application-results)
++ [Questions](#8-questions)
+
+## 3. Description: 
 When creating an open source project on GitHub, it is important to have a high-quality README for the app. This should includw what the app is for, how to use the app, how to install it, how to report issues, and how to make contributions & mdash; this last part increases the likelihood that other developers will contribute to the success of the project. 
 
 You can quickly and easily create a README file by using a command-line application to generate one. This allows the project creator to devote more time to working on the project. 
 
 This is a command-line application that runs with Node.js that dynamically generates a README.md file based on input about your project. Checkout the example_readme.md in this repo as an example.
 
-## 3. Table of Contents:
-This readme file includes the following contents:
-+ Installation
-+ Usage
-+ License
-+ Contributing
-+ Test
-+ Questions
 
 ## 4. Installation:
-To generate your own README, `git clone` the repo down to your local so you have the Node project on your local.
+Please make sure to have following programs installed on your computer to use this app:
++ VS Code
++ GitBash
++ Node.js
 
-Run `npm install` in order to install the following `npm` package dependencies as specified in the `package.json`:
-+ `inquirer` will prompt you for your inputs from the command line.
+To generate your own README, `git clone` the repo down to your local. Then, run `npm install` in order to install the `npm` package dependencies as specified in the `./package.json` - `inquirer v8.2.5` will be installed. Now, you are ready to go!
 
-The application will start by running `node index.js` in the command line.
-
-Answer the prompts in your command line to generate the REAMDE.
-
-After answering all the prompts, your REAMDE file will be named `README.md` and will be ready for you at the root of the repo.
 
 ## 5. Usage:
-When you run `node index.js`, the application uses the `inquirer` package to prompt you in the command line with a series of questions about your GitHub and about your project.
+When you run `node index.js`, the application uses the `inquirer` package to prompt you in the command line with a series of questions about your project. Then, answer the prompts in your command line or in default editor to generate the REAMDE. Some questions might need a long answer, and for these questions, the default editor will be popped up, then write your answer on the editor. After answering all the prompts, your REAMDE file will be created as `./README_ex.md`.
 
-The application then takes your responses and uses `axios` to fetch your GitHub profile from the `GitHub API`, including your GitHub profile picture (avatar) and email.From there, the application will generate markdown and a table of contents for the README conditionally based on your responses to the `Inquirer` prompts. So, if you don't answer the optional questions, such a `Installation`, and `Installation` section will not be included in your README. The REAMDE will also include badges for your GitHub repo.
+For the questions of using default editor:
++ `Press <enter> to launch your preferred editor` will be displayed along with the question. 
++ Then, press `enter` key. Then, your default text editor will be popped up.
++ Edit your answer for the question on the editor.
++ Go to `File` and click `Save` button.
++ Then, click `Exit` button.
++ Then, the prompt will show `Received` at the end of the question. Then, your answer is successfully saved.
++ If you do not want to answer for the question (only if it is the optional question), then do not include anything but click 'Save' and 'Exit' button.
 
-Finally, `fs.writeFile` is used to generate your project's REAMDE.md file. Checout the `ExampleREADME.md` in this repo as an example on the final output.
+If you want to switch the input option from the "editor" to "command line input", uncomment `type: "input"` and comment `type: "editor"` in each question item in `index.js`. This will allow you to switch the input option from "editor" to the direct "command line" input.
+
+There are `mandatory` and `optional` questions which will be displayed in each prompt. You have to answer for the `mandatory` questions, and you can skip `optional` questions if you want. Then, the application will generate a table of contents for the README conditionally based on your responses to the `Inquirer` prompts. So, if you don't answer the optional questions, which will be displayed in each prompt, the optional section will not be included in your README. 
+Finally, `fs.writeFile` is used to generate your project's readme file, `./REAMDE_ex.md` file. Checout the `./README_ex.md` in this repo as an example on the final output.
 
 ## 6. License:
-MIT License
+### The MIT License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 
-## 7. Questions?:
+## 7. Application results:
+Live URL: https://jungwoo33.github.io/week9_professional_README_generator/
+
+![App demo](./assets/project_description.gif)
+
+## 8. Questions?:
 If you have any questions, feel free to contact me via information below:\
-Email: jungwoo33@gmail.com
+[GitHub:] https://github.com/jungwoo33\
+[Email:] jungwoo33@gmail.com
 
 - - -
 © 2022 Jungwoo Lee. Confidential and Proprietary. All Rights Reserved.
