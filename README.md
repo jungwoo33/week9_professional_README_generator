@@ -49,9 +49,9 @@ Finally, `fs.writeFile` is used to generate your project's readme file, `./REAMD
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 
 ## 7. Application results:
-Live URL: https://jungwoo33.github.io/week9_professional_README_generator/
-
-![App demo](./assets/project_description.gif)
+[GitHub:] https://jungwoo33.github.io/week9_professional_README_generator/<br>
+View walk through video here - [Screencastify](https://drive.google.com/file/d/1g-tg4KfzAiYeU7YZghBXeaSwc_0J3712/view)<br>
+or, the original video file is in `./assets/week9_professional_README_generator.avi`
 
 ## 8. Questions?:
 If you have any questions, feel free to contact me via information below:\
